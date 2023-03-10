@@ -24,11 +24,13 @@ public class MainController {
 	private ProductsRepository productRepository;
 	
 	@GetMapping(path = "/test")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Product getTestProduct() {
 		return new Product(1L, "prova", "descrizione prova", 2.2);
 	}
 	
 	@GetMapping(path = "/product/{id}")
+	@CrossOrigin(origins = "http://localhost:4200")
 	public Product getProductById(@PathVariable Integer id) {
 		return productRepository.findById(id).orElse(null);
 	}
@@ -46,6 +48,7 @@ public class MainController {
 			path = "/product",
 			consumes = MediaType.APPLICATION_JSON_VALUE
 			)
+	@CrossOrigin(origins = "http://localhost:4200")
 	public void saveProduct(@RequestBody Product product) throws Exception {
 		if(product != null) {
 			productRepository.save(product);
